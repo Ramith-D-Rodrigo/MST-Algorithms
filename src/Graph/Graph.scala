@@ -75,4 +75,8 @@ class Graph(graphType: Int, vertexList: List[Int], edgeList: List[(Int, Int, Int
         }
     }
 
+    def getEdgeCount() : Int = {
+        return edgeList.length;
+    }
+
 }
