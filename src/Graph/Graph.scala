@@ -1,17 +1,21 @@
-package Graph
+package graph
 
-class Graph(graphType: Int, vertexList: List[Int], edgeList: List[(Int, Int, Int)]){    //edgeList -> (src, dest, weight)
+class Graph(graphType: Int, vertexList: Array[Int], edgeList: Array[(Int, Int, Int)]){    //edgeList -> (src, dest, weight)
     var adjacencyMatrix: Array[Array[Int]] = null;
     var adjacencyList: Array[List[(Int, Int)]] = null; //dest, weight
 
     graphType match {
         case 0 => { //adjacency matrix
             //create a 2d array of size vertexList.length x vertexList.length
-            adjacencyMatrix = Array.ofDim[Int](vertexList.length, vertexList.length);
+            var vertexLen = vertexList.length;
+            adjacencyMatrix = Array.ofDim[Int](vertexLen, vertexLen);
 
             //initialize adjacency matrix
-            for(i <- 0 until vertexList.length){
-                for(j <- 0 until vertexList.length){
+
+            for(i <- 0 until vertexLen){
+                for(j <- 0 until vertexLen){
+                    println("i: " + i + " j: " + j);
+                    //if the i, j in edgelist then set the weight
                     adjacencyMatrix(i)(j) = Int.MaxValue;   //infinity
                 }
             }

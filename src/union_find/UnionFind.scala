@@ -1,6 +1,6 @@
-package UnionFind
+package union_find
 
-class UnionFind(vertexList: List[Int]) {
+class UnionFind(vertexList: Array[Int]) {
     var parent: Array[Int] = new Array[Int](vertexList.length);
 
     for (i <- 0 until vertexList.length) {   //initialize parent array

@@ -1,9 +1,9 @@
-import Kruskal.*
-import Graph.* 
+import kruskal.Kruskal
+import graph.Graph
 
 object KruskalAccuracyTest extends App{
 
-    var vertices = (0 to 9).toList; //10 vertices
+    var vertices = (0 to 9).toArray; //10 vertices
 
     var edges = vertices.flatMap(x => 
         vertices.map(y => {
@@ -14,7 +14,7 @@ object KruskalAccuracyTest extends App{
                 (x,y,0)
             }
         }
-        )).filter(x => x._3 != 0 && x._1 != x._2); //remove edges with weight 0 and self loops
+        )).filter(x => x._3 != 0 && x._1 != x._2).toArray; //remove edges with weight 0 and self loops
 
     for(i <- edges){
         println(i.toString());

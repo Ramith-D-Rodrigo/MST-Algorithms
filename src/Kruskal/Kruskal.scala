@@ -1,7 +1,7 @@
-package Kruskal
+package kruskal
 
-import Graph.Graph
-import UnionFind.UnionFind
+import graph.Graph
+import union_find.UnionFind
 import scala.collection.mutable.Set as SET
 
 class Kruskal(graph: Graph){
@@ -10,7 +10,7 @@ class Kruskal(graph: Graph){
 
     graph.getGraphType() match {
         case 0 => { //adjacency matrix
-            var unionFind = new UnionFind((0 until graph.adjacencyMatrix.length).toList);
+            var unionFind = new UnionFind((0 until graph.adjacencyMatrix.length).toArray);
 
 /*             for(i <- unionFind.parent){
                 println(i);
@@ -31,7 +31,7 @@ class Kruskal(graph: Graph){
 
 
         case 1 => { //adjacency list
-            var unionFind = new UnionFind((0 until graph.adjacencyList.length).toList);
+            var unionFind = new UnionFind((0 until graph.adjacencyList.length).toArray);
 
             var orderedEdgeList = graph.adjacencyList.zipWithIndex.flatMap{
                             case (edgeList, x) => (edgeList.map(listItem => (x, listItem._1, listItem._2)))   //first flat map to get the indices and edge weight
