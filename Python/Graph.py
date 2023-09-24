@@ -1,47 +1,49 @@
 class Graph:
-    def __init__(self, graph_type, vertex_list, edge_list):
-        self.adjacency_matrix = None
-        self.adjacency_list = None  # dest, weight
+    def __init__(self, graphType, VertexList, edgeList):
+        self.adjacencyMatrix = None
+        self.adjacencyList = None  # dest, weight
+        self.graphType = graphType
 
-        if graph_type == 0:  # adjacency matrix
-            # create a 2D list of size len(vertex_list) x len(vertex_list)
-            vertex_len = len(vertex_list)
-            self.adjacency_matrix = [[float('inf')] * vertex_len for _ in range(vertex_len)]
+        if graphType == 0:  # adjacency matrix
+            # create a 2D list of size len(VertexList) x len(VertexList)
+            vertexLen = len(VertexList)
+            self.adjacencyMatrix = [[float('inf')] * vertexLen for _ in range(vertexLen)]
 
-            # initialize adjacency matrix
-            #for i in range(vertex_len):
-                ##for j in range(vertex_len):
-                    ##self.adjacency_matrix[i][j] = float('inf')
 
-            # populate adjacency matrix with edge_list
-            for i in range(len(edge_list)):
-                self.adjacency_matrix[edge_list[i][0]][edge_list[i][1]] = edge_list[i][2]
-                self.adjacency_matrix[edge_list[i][1]][edge_list[i][0]] = edge_list[i][2]
+            # populate adjacency matrix with edgeList
+            for i in range(len(edgeList)): 
+                #the graph is undirected, so we add the edge in both directions
+                self.adjacencyMatrix[edgeList[i][0]][edgeList[i][1]] = edgeList[i][2]
+                self.adjacencyMatrix[edgeList[i][1]][edgeList[i][0]] = edgeList[i][2]
 
-        elif graph_type == 1:  # adjacency list
-            # create a list of size len(vertex_list)
-            self.adjacency_list = [[] for _ in range(len(vertex_list))]
+        elif graphType == 1:  # adjacency list
+            # create a list of size len(VertexList)
+            self.adjacencyList = [[] for _ in range(len(VertexList))]
 
-            # populate adjacency list with edge_list
-            for i in range(len(edge_list)):
-                self.adjacency_list[edge_list[i][0]].append((edge_list[i][1], edge_list[i][2]))
-                self.adjacency_list[edge_list[i][1]].append((edge_list[i][0], edge_list[i][2]))
+            # populate adjacency list with edgeList
+            for i in range(len(edgeList)):  
+                if(edgeList[i][0] == edgeList[i][1]): #no self loops
+                    continue
+                
+                # the graph is undirected, so we add the edge in both directions
+                self.adjacencyList[edgeList[i][0]].append((edgeList[i][1], edgeList[i][2]))
+                self.adjacencyList[edgeList[i][1]].append((edgeList[i][0], edgeList[i][2]))
 
         else:
             print("Invalid graph type.")
 
-    def get_graph_type(self):
-        return self.graph_type
+    def getGraphType(self):
+        return self.graphType
 
-    def print_graph(self):
-        if self.adjacency_matrix is not None:  # adjacency matrix
-            for row in self.adjacency_matrix:
+    def printGraph(self):
+        if self.adjacencyMatrix is not None:  # adjacency matrix
+            for row in self.adjacencyMatrix:
                 print("\t".join(str(weight) if weight != float('inf') else "-" for weight in row))
-        elif self.adjacency_list is not None:  # adjacency list
-            for i, adjacency in enumerate(self.adjacency_list):
+        elif self.adjacencyList is not None:  # adjacency list
+            for i, adjacency in enumerate(self.adjacencyList):
                 print(f"{i}: " + " ".join(f"({dest},{weight})" for dest, weight in adjacency))
         else:
             print("Invalid graph type.")
 
-    def get_edge_count(self):
-        return len(self.edge_list)
+    def getEdgeCount(self):
+        return len(self.edgeList)

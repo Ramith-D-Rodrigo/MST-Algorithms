@@ -5,3 +5,8 @@
 .metals
 .scala-build
 .vscode
+
+/Report
+
+denseGraphEdges.txt
+sparseGraphEdges.txt
